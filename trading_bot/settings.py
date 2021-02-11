@@ -46,7 +46,10 @@ THIRD_APPS = [
     'django_celery_results',
 ]
 
-LOCAL_APPS = []
+LOCAL_APPS = [
+    'utils.apps.UtilsConfig',
+    'accounts.apps.AccountsConfig',
+]
 
 INSTALLED_APPS = THEME_APPS + DJANGO_APPS + THIRD_APPS + LOCAL_APPS
 
@@ -212,3 +215,6 @@ JAZZMIN_UI_TWEAKS = {
     "dark_mode_theme": "darkly",
     "actions_sticky_top": True
 }
+
+# Users & Authentication
+AUTH_USER_MODEL = 'accounts.User'
