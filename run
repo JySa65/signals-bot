@@ -1,0 +1,55 @@
+#!/bin/bash
+# declare -A obj=(
+#     [pws]=$(pwd)
+# )
+# echo "${obj[pws]}"
+
+function build() {
+	NAME=$(grep NAME .env | cut -d '=' -f 2-)
+	DOCKER_USER=$(grep DOCKER_USER .env | cut -d '=' -f 2-)
+	docker build -t $DOCKER_USER/$NAME .
+}
+
+function up() {
+	# run with parameters -> ./run.sh up
+	# run without parameters -> ./run.sh up "-d up"
+	docker-compose up $@;
+} 
+
+function down() {
+	# run -> ./run.sh down
+	docker-compose down;
+} 
+
+function _command() {
+	# run -> ./run.sh command <command python> 
+	docker-compose run --rm trading_bot python manage.py $@ 
+}
+
+function migrate() {
+	# run -> ./run.sh command <command python> 
+	_command migrate 
+}
+
+key=$1
+
+case $key in
+	up)
+		up $2;
+	;;
+	down)
+		down;
+	;;
+	command)
+		_command $2;
+	;;
+	build) 
+		build;
+	;;
+	migrate) 
+		migrate;
+	;;
+	*)
+		echo "Debes escoger una opcion :D"
+	;;
+esac

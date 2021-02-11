@@ -1,0 +1,80 @@
+version: "3.9"
+services:
+  trading_bot:
+    image: jysa/trading_bot
+    command: ./scripts/run_dev.sh
+    env_file: ./.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    networks:
+      - backend
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:13.1
+    env_file: ./.env
+    volumes:
+      - ./.docker/postgres:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  redis:
+    image: redis:6.0
+    networks:
+      - backend
+
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:3.8.11-management
+    env_file: ./.env
+    volumes:
+      - ./:/app
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - backend
+
+  worker:
+    image: jysa/trading_bot
+    command: ./scripts/celery/run_worker.sh
+    env_file: ./.env
+    volumes:
+      - ./:/app
+    depends_on:
+      - rabbit
+    networks:
+      - backend
+
+  beat:
+    image: jysa/trading_bot
+    command: ./scripts/celery/run_beat.sh
+    env_file: ./.env
+    volumes:
+      - ./:/app
+    depends_on:
+      - rabbit
+    networks:
+      - backend
+
+  flower:
+    image: jysa/trading_bot
+    command: ./scripts/celery/run_flower.sh
+    env_file: ./.env
+    volumes:
+      - ./:/app
+    ports:
+      - "5555:5555"
+    depends_on:
+      - rabbit
+      - worker
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

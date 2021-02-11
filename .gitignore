@@ -1,0 +1,8 @@
+*.pyc
+*.log
+.temp
+.env
+.docker
+celerybeat-schedule
+celerybeat.pid
+db.sqlite3

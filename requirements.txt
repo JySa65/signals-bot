@@ -1,0 +1,15 @@
+# Django
+Django==3.1.6
+Pillow==8.1.0
+# Password Security
+argon2-cffi==20.1.0
+# DB
+psycopg2==2.8.6 --no-binary psycopg2
+# task async django Celery
+celery<5.0.0
+flower==0.9.7
+redis==3.5.3
+django-redis==4.12.1
+django-celery-results==2.0.1
+# theme admin
+django-jazzmin==2.4.4
