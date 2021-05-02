@@ -6,7 +6,7 @@ from django.db import models
 
 class TRDBModel(models.Model):
     """Trading bot base model.
-    CRideModel acts as an abstract base class from which every
+    TRDBModel acts as an abstract base class from which every
     other model in the project will inherit. This class provides
     every table with the following attributes:
         + created_at (DateTime): Store the datetime the object was created.
