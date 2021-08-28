@@ -1,6 +1,6 @@
-# TRADING BOT
+# Signals bot
 
-## Bot for trading with binance or tauros
+## Signals bot using Binance API 
 ----
 ## Requeriments
 
