@@ -12,13 +12,16 @@
 ## Install
 
 1. docker
-1. docker-compose
+2. docker-compose
+
 
 ## Create file .env and Edit
 
 ```sh
-    cp .env.example .env
-    nano .env
+cp .env.example .env
+```
+```sh
+nano .env
 ```
 
 ## Create docker image Project
@@ -26,7 +29,7 @@
 - Create build by docker
 
 ```sh
-    ./run build
+./run build
 ```
 
 ## Development
@@ -34,22 +37,22 @@
 ### Migrations
 
 ```sh
-    ./run migrate
+./run migrate
 ```
 ### Create Superuser
 
 ```sh
-    ./run command createsuperuser
+./run command createsuperuser
 ```
 
 ### Start
 
 ```sh
-    ./run up
+./run up
 ```
 
 ### Stop
 
 ```sh
-    ./run down
+./run down
 ```
