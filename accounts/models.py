@@ -1,11 +1,11 @@
 """User model."""
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from utils.models import TRDBModel
+from utils.models import GenericBaseModel
 # Create your models here.
 
 
-class User(TRDBModel, AbstractUser):
+class User(GenericBaseModel, AbstractUser):
     """User model.
     Extend from Django's Abstract User,  add some extra fields.
     """
